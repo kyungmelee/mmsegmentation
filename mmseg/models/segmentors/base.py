@@ -276,6 +276,9 @@ class BaseSegmentor(BaseModule, metaclass=ABCMeta):
 
         img = img * (1 - opacity) + color_seg * opacity
         img = img.astype(np.uint8)
+
+        img2 = color_seg.astype(np.uint8)
+
         # if out_file specified, do not show image in window
         if out_file is not None:
             show = False
@@ -284,6 +287,11 @@ class BaseSegmentor(BaseModule, metaclass=ABCMeta):
             mmcv.imshow(img, win_name, wait_time)
         if out_file is not None:
             mmcv.imwrite(img, out_file)
+            import os
+            dir, file_name = os.path.split(out_file)
+            file_name = os.path.splitext(file_name)
+            color_seg_name = dir +'/' + file_name[0] + '_color_seg.bmp'
+            mmcv.imwrite(img2, color_seg_name)
 
         if not (show or out_file):
             warnings.warn('show==False and out_file is not specified, only '
