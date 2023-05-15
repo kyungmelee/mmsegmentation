@@ -7,8 +7,8 @@ model = dict(
     backbone=dict(
         type='mmcls.PoolFormer',
         arch='s12',
-        init_cfg=dict(
-            type='Pretrained', checkpoint=checkpoint_file, prefix='backbone.'),
+        #init_cfg=dict(
+        #    type='Pretrained', checkpoint=checkpoint_file, prefix='backbone.'),
         in_patch_size=7,
         in_stride=4,
         in_pad=2,
